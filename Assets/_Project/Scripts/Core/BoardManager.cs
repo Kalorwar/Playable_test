@@ -127,7 +127,7 @@ namespace _Project.Scripts.Core
                 stack.Init(_config, stackColors, _elementPrefab, _materialMap);
 
                 var draggable = stack.gameObject.AddComponent<DraggableStack>();
-                draggable.Init(stack, _gameCamera, this, _tutorialManager, _config);
+                draggable.Init(stack, _gameCamera, this, _tutorialManager, _config, _chainReaction);
 
                 _playerStacks.Add(stack);
             }
@@ -174,7 +174,7 @@ namespace _Project.Scripts.Core
         {
             foreach (var n in GetNeighbors(target))
             {
-                if (n.IsEmpty)
+                if (n.IsEmpty || n.IsLocked)
                 {
                     continue;
                 }
@@ -206,13 +206,11 @@ namespace _Project.Scripts.Core
             _chainReaction.StartChain(stack.CurrentCell);
         }
 
-        // ⬇️ Новый метод: проверяет, есть ли ещё стопки у игрока
         public bool HasPlayerStacks()
         {
             return _playerStacks.Count > 0;
         }
 
-        // ⬇️ Новый метод: собирает уникальные цвета со всех стопок на поле
         private List<HexColor> GetColorsOnBoard()
         {
             var colors = new HashSet<HexColor>();
@@ -270,7 +268,7 @@ namespace _Project.Scripts.Core
                 stack.Init(_config, stackColors, _elementPrefab, _materialMap);
 
                 var draggable = stack.gameObject.AddComponent<DraggableStack>();
-                draggable.Init(stack, _gameCamera, this, _tutorialManager, _config);
+                draggable.Init(stack, _gameCamera, this, _tutorialManager, _config, _chainReaction);
 
                 _playerStacks.Add(stack);
                 spawned++;

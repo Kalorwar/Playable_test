@@ -8,6 +8,7 @@ namespace _Project.Scripts.Hex
 
         public HexStack Stack { get; set; }
         public bool IsEmpty => Stack == null || Stack.IsEmpty;
+        public bool IsLocked { get; set; }
 
         public void Init(HexCoordinates coordinates)
         {

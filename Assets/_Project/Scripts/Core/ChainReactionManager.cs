@@ -17,6 +17,7 @@ namespace _Project.Scripts.Core
         private GameConfig _config;
         private GameManager _gameManager;
         private HexMaterialMap _materialMap;
+        public bool IsChainActive { get; private set; }
 
         private void OnDisable()
         {
@@ -44,6 +45,7 @@ namespace _Project.Scripts.Core
 
         private IEnumerator ExecuteChain(HexCell startCell)
         {
+            IsChainActive = true;
             var currentTarget = startCell;
             _chainSpeed = 1f;
             Coroutine lastAnim = null;
@@ -84,15 +86,17 @@ namespace _Project.Scripts.Core
             }
             else
             {
-                // ⬇️ Если цепочка закончилась, поле не пустое, и у игрока нет стопок — добавляем 3 новых
                 _boardManager.TryRefillPlayerStacks();
             }
 
+            IsChainActive = false;
             _chainReaction = null;
         }
 
         private IEnumerator AnimateAndProcess(HexCell target, HexCell from, List<HexElement> elements)
         {
+            target.IsLocked = true;
+
             var duration = _config.ElementFlyDuration / _chainSpeed;
             var jumpHeight = _config.ElementJumpHeight;
             var staggerDelay = duration * 0.15f;
@@ -162,6 +166,7 @@ namespace _Project.Scripts.Core
 
             if (target.Stack == null)
             {
+                target.IsLocked = false;
                 yield break;
             }
 
@@ -182,6 +187,8 @@ namespace _Project.Scripts.Core
 
                 _chainSpeed *= _config.SpeedMultiplier;
             }
+
+            target.IsLocked = false;
         }
 
         private void SpawnParticle(Vector3 position, HexColor color)

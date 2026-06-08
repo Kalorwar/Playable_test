@@ -12,6 +12,7 @@ namespace _Project.Scripts.Hex
     {
         private const int BoardLayer = 6;
         private BoardManager _boardManager;
+        private ChainReactionManager _chainReactionManager;
         private Collider _collider;
         private GameConfig _config;
         private Vector3 _dragOffset;
@@ -28,6 +29,17 @@ namespace _Project.Scripts.Hex
         private void Start()
         {
             _collider = GetComponent<Collider>();
+        }
+
+        private void Update()
+        {
+            if (_isDragging && _chainReactionManager.IsChainActive)
+            {
+                _isDragging = false;
+                _collider.enabled = true;
+                ReturnToOriginal();
+                _hoveredCell = null;
+            }
         }
 
         private void OnDisable()
@@ -56,6 +68,11 @@ namespace _Project.Scripts.Hex
 
         public void OnPointerDown(PointerEventData eventData)
         {
+            if (_chainReactionManager.IsChainActive)
+            {
+                return;
+            }
+
             _isDragging = true;
             _originalPosition = transform.position;
             _originalParent = transform.parent;
@@ -99,8 +116,9 @@ namespace _Project.Scripts.Hex
         }
 
         public void Init(HexStack stack, Camera gameCamera, BoardManager boardManager, TutorialManager tutorialManager,
-            GameConfig config)
+            GameConfig config, ChainReactionManager chainReactionManager)
         {
+            _chainReactionManager = chainReactionManager;
             _stack = stack;
             _gameCamera = gameCamera;
             _boardManager = boardManager;
@@ -130,15 +148,15 @@ namespace _Project.Scripts.Hex
         {
             var ray = _gameCamera.ScreenPointToRay(screenPosition);
 
-            var results = new RaycastHit[] { };
-            Physics.RaycastNonAlloc(ray, results, 100f, 1 << BoardLayer);
+            var results = new RaycastHit[10];
+            var hits = Physics.RaycastNonAlloc(ray, results, 100f, 1 << BoardLayer);
 
             HexCell bestCell = null;
             var bestDist = float.MaxValue;
 
-            foreach (var hit in results)
+            for (var i = 0; i < hits; i++)
             {
-                var cell = hit.collider.GetComponent<HexCell>();
+                var cell = results[i].collider.GetComponent<HexCell>();
                 if (cell != null && cell.IsEmpty)
                 {
                     var dist = Vector2.Distance(screenPosition,

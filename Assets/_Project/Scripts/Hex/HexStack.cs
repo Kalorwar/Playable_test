@@ -99,7 +99,6 @@ namespace _Project.Scripts.Hex
             return Count > 0 && _elements.All(e => e.Color == _elements[0].Color);
         }
 
-        // ⬇️ Новый метод: возвращает все цвета элементов в стопке
         public IEnumerable<HexColor> GetColors()
         {
             return _elements.Select(e => e.Color);

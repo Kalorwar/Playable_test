@@ -20,6 +20,6 @@ MonoBehaviour:
   _returnDuration: 0.3
   _elementJumpHeight: 2
   _elementFlipAngle: -180
-  _speedMultiplier: 1.2
+  _speedMultiplier: 1.3
   _delayBeforePackshot: 0.8
   _idleDelay: 2.5

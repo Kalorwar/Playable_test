@@ -20,7 +20,6 @@ namespace _Project.Scripts.Core
         {
             _tutorialManager.Init(_config);
 
-            // ⬇️ Передаем MaterialMap
             _chainReactionManager.Init(_config, _boardManager, this, _boardManager.MaterialMap);
 
             _boardManager.Init(_config, _levelData, _chainReactionManager, _tutorialManager);
