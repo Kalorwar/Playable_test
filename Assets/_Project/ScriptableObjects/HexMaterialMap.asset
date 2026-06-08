@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a525ee6195744f26a88355282e0aad80, type: 3}
+  m_Name: HexMaterialMap
+  m_EditorClassIdentifier: 
+  _pairs:
+  - Color: 0
+    Material: {fileID: 2100000, guid: c733dcced1e2c3044b6bbc3a1bbcc6ef, type: 2}
+  - Color: 1
+    Material: {fileID: 2100000, guid: fe0d7086a101e9b43ac281253226d5d1, type: 2}
+  - Color: 2
+    Material: {fileID: 2100000, guid: bc90851913caaee4d98b85c078928c01, type: 2}
+  - Color: 3
+    Material: {fileID: 2100000, guid: 1bcf42210082e2f4ba0d52b6a5a94bb9, type: 2}
+  - Color: 4
+    Material: {fileID: 2100000, guid: b6696d160c120694ab48b7a44c75d89b, type: 2}
+  - Color: 5
+    Material: {fileID: 2100000, guid: 556cbf2b1e3173d438b9ce465d7d5f2f, type: 2}
+  - Color: 6
+    Material: {fileID: 2100000, guid: 94a9b00ee72056646b3bf5f52a192cc3, type: 2}
+  - Color: 7
+    Material: {fileID: 2100000, guid: 4a855aa0ddaf9dc4a8b959cd8a784cfc, type: 2}
