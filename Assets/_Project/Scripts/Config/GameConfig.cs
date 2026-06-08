@@ -5,9 +5,9 @@ namespace _Project.Scripts.Config
     [CreateAssetMenu(fileName = "GameConfig", menuName = "HexStack/GameConfig")]
     public class GameConfig : ScriptableObject
     {
-        [Header("Stack")] [SerializeField] private int _stackSize = 8;
+        [Header("Stack")] [SerializeField] private int _stackSize = 10;
 
-        [SerializeField] private int _splitPoint = 4;
+        [SerializeField] private int _splitPoint = 5;
 
         [Header("Animation")] [SerializeField] private float _elementFlyDuration = 0.4f;
 

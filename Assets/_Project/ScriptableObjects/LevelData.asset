@@ -18,6 +18,11 @@ MonoBehaviour:
     BottomColor: 1
     IsFull: 1
     IsEmpty: 1
+  - Coordinates: {x: 1, y: -1}
+    TopColor: 2
+    BottomColor: 0
+    IsFull: 1
+    IsEmpty: 0
   - Coordinates: {x: 0, y: 1}
     TopColor: 1
     BottomColor: 2
@@ -40,7 +45,7 @@ MonoBehaviour:
     IsEmpty: 0
   - Coordinates: {x: 1, y: 1}
     TopColor: 5
-    BottomColor: 0
+    BottomColor: 2
     IsFull: 1
     IsEmpty: 0
   - Coordinates: {x: 2, y: 0}
@@ -65,7 +70,7 @@ MonoBehaviour:
     IsEmpty: 0
   _playerStacks:
   - Color: 1
-  - Color: 4
+  - Color: 0
   - Color: 2
   _hexSize: 1
   _baseLayerPrefab: {fileID: 3188802700028137449, guid: 5d49215b37cb8274ebb02955f3890062, type: 3}

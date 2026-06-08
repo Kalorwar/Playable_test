@@ -8,6 +8,11 @@ namespace _Project.Scripts.Hex
         [SerializeField] private MeshRenderer _meshRenderer;
         public HexColor Color { get; private set; }
 
+        private void OnDisable()
+        {
+            transform.DOKill();
+        }
+
         public void SetColor(HexColor color, Material mat)
         {
             Color = color;
@@ -33,8 +38,7 @@ namespace _Project.Scripts.Hex
 
         public Tweener Disappear(float duration)
         {
-            return transform.DOScale(0f, duration)
-                .SetEase(Ease.InBack)
+            return transform.DOScale(Vector3.zero, duration)
                 .OnComplete(() => Destroy(gameObject));
         }
     }

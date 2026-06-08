@@ -21,6 +21,17 @@ namespace _Project.Scripts.Hex
 
         public Transform ElementsContainer => _elementsContainer;
 
+        private void OnDisable()
+        {
+            foreach (var el in _elements)
+            {
+                if (el != null)
+                {
+                    el.transform.DOKill();
+                }
+            }
+        }
+
         public void Init(GameConfig config, List<HexColor> colors, GameObject elementPrefab, HexMaterialMap materialMap)
         {
             _config = config;
@@ -68,14 +79,13 @@ namespace _Project.Scripts.Hex
                 var el = newElements[i];
                 el.transform.SetParent(_elementsContainer, true);
                 el.transform.localRotation = Quaternion.identity;
-
                 _elements.Add(el);
             }
 
             RefreshPositions();
         }
 
-        private void RefreshPositions()
+        public void RefreshPositions()
         {
             var heightStep = 0.15f;
             for (var i = 0; i < _elements.Count; i++)
@@ -89,12 +99,32 @@ namespace _Project.Scripts.Hex
             return Count > 0 && _elements.All(e => e.Color == _elements[0].Color);
         }
 
+        // ⬇️ Новый метод: возвращает все цвета элементов в стопке
+        public IEnumerable<HexColor> GetColors()
+        {
+            return _elements.Select(e => e.Color);
+        }
+
         public IEnumerator AnimateDisappear(float speed)
         {
             var duration = _config.ElementDisappearDuration / speed;
+            var staggerDelay = duration / 2f;
+
+            Tweener lastTween = null;
+
             for (var i = _elements.Count - 1; i >= 0; i--)
             {
-                yield return _elements[i].Disappear(duration).WaitForCompletion();
+                lastTween = _elements[i].Disappear(duration);
+
+                if (i > 0)
+                {
+                    yield return new WaitForSeconds(staggerDelay);
+                }
+            }
+
+            if (lastTween != null)
+            {
+                yield return lastTween.WaitForCompletion();
             }
 
             _elements.Clear();

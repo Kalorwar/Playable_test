@@ -11,14 +11,12 @@ namespace _Project.Scripts.Hex
     public class DraggableStack : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
     {
         private const int BoardLayer = 6;
-
         private BoardManager _boardManager;
         private Collider _collider;
         private GameConfig _config;
         private Vector3 _dragOffset;
         private float _dragPlaneDistance;
         private Vector3 _dragStartPosition;
-        private readonly float _fixedY = 0.323f;
         private Camera _gameCamera;
         private HexCell _hoveredCell;
         private bool _isDragging;
@@ -30,6 +28,11 @@ namespace _Project.Scripts.Hex
         private void Start()
         {
             _collider = GetComponent<Collider>();
+        }
+
+        private void OnDisable()
+        {
+            transform.DOKill();
         }
 
         public void OnDrag(PointerEventData eventData)
@@ -166,7 +169,6 @@ namespace _Project.Scripts.Hex
             transform.SetParent(cell.transform, true);
 
             var targetPos = cell.transform.position;
-            targetPos.y = _fixedY;
 
             transform.DOMove(targetPos, _config.DragSnapDuration)
                 .SetEase(Ease.OutQuad)
@@ -182,7 +184,6 @@ namespace _Project.Scripts.Hex
             transform.SetParent(_originalParent, true);
 
             var returnPos = _originalPosition;
-            returnPos.y = _fixedY;
 
             transform.DOMove(returnPos, _config.ReturnDuration).SetEase(Ease.OutQuad);
         }
