@@ -1,0 +1,63 @@
+{
+  "BuildID": "3182b951-af2e-4dbf-a29d-84cc537ad3a0",
+  "Command": "project:build",
+  "ProjectID": "1bf212bd68d578e4a9cc999c221de5c8",
+  "ProjectStateHash": "4a5e659b9c905c55411d855c17f93822ab531f7aa2e6139b0ed16b9ab9b661d9",
+  "StageCompletedAt": 3,
+  "EarliestFatalError": 0,
+  "StartTime": 1781028684214,
+  "EndTime": 1781028707135,
+  "PlaygroundUserID": 36968,
+  "OperatingSystem": "win32",
+  "UnityPackageID": null,
+  "TargetPlatform": "develop",
+  "UnityVersion": "2022.3.62f2",
+  "LunaVersion": "7.2.0",
+  "LogCount": 2,
+  "Logs": [
+    {
+      "LogID": "e6fdaace-0836-4df9-b4e2-278d5e253422",
+      "Order": 1,
+      "Timestamp": 1781028707347,
+      "Stage": 3,
+      "ErrorType": 3,
+      "ErrorCode": "LP3007",
+      "Description": "You are not using any custom events",
+      "Details": [
+        "You are not using any custom events. It is recommended to use custom events to have a better understanding of the playable."
+      ],
+      "DescriptionValues": [
+        ""
+      ],
+      "DetailsValues": [
+        ""
+      ],
+      "LogCount": 1,
+      "LinePosition": null,
+      "FilePath": "",
+      "ClassName": "",
+      "MemberName": "",
+      "Severity": 0
+    },
+    {
+      "LogID": "3e62cab1-ec7a-4d9f-aa23-eaf4df56e4d0",
+      "Order": 1,
+      "Timestamp": 1781028707348,
+      "Stage": 3,
+      "ErrorType": 3,
+      "ErrorCode": "LP3011",
+      "Description": "You are not using any LunaPlaygroundFields attributes.",
+      "Details": [
+        "You are not using any LunaPlaygroundFields attributes, it allows you to configure your playable to different concepts to find the best variation, which can drastically improve playable performance on all ad networks."
+      ],
+      "DescriptionValues": null,
+      "DetailsValues": null,
+      "LogCount": 1,
+      "LinePosition": null,
+      "FilePath": "",
+      "ClassName": "",
+      "MemberName": "",
+      "Severity": 0
+    }
+  ]
+}
