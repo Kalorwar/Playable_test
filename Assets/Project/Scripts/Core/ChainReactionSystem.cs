@@ -113,6 +113,12 @@ namespace Project.Scripts.Core
         {
             target.IsLocked = true;
 
+            if (elements == null || elements.Contains(null))
+            {
+                target.IsLocked = false;
+                yield break;
+            }
+
             yield return FlyElements(target, from, elements);
 
             if (target.Stack != null)

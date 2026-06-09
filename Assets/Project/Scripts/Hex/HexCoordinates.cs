@@ -26,12 +26,23 @@ namespace Project.Scripts.Hex
 
         public override bool Equals(object obj)
         {
-            return obj is HexCoordinates o && Q == o.Q && R == o.R;
+            if (obj is HexCoordinates other)
+            {
+                return Q == other.Q && R == other.R;
+            }
+
+            return false;
         }
 
         public override int GetHashCode()
         {
-            return (Q, R).GetHashCode();
+            unchecked
+            {
+                var hash = 17;
+                hash = hash * 31 + Q;
+                hash = hash * 31 + R;
+                return hash;
+            }
         }
     }
 }
